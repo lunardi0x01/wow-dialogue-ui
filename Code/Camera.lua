@@ -36,7 +36,7 @@ local GetCameraZoom = GetCameraZoom;
 local CameraZoomIn = CameraZoomIn;
 local CameraZoomOut = CameraZoomOut;
 local ConsoleExec = ConsoleExec;
-local SetUIVisibility = SetUIVisibility;
+local SetGameUIShown = SetUIVisibility;
 local InCombatLockdown = InCombatLockdown;
 local IsMounted = IsMounted;
 local IsInInstance = IsInInstance;
@@ -53,7 +53,7 @@ CameraUtil.isMidnight = addon.IsToCVersionEqualOrNewerThan(120000);
 local IsDynamicFlying; -- Avoid changing FOV when mounted to prevent FOV stuck at over normal max due to Skyriding Speed Effects
 
 if CameraUtil.isMidnight then
-    SetUIVisibility = function(state)
+    SetGameUIShown = function(state)
         UIParent:SetShown(state);
         --[[
         if state then
@@ -670,7 +670,7 @@ local function ShowUIParent(state)
     if state then
         if ShouldShowUIParent() then
             UIParent:Show();
-            SetUIVisibility(true);
+            SetGameUIShown(true);
         else
             MovieFrame.uiParentShown = true;
         end
@@ -694,7 +694,7 @@ function FadeHelper:HideUIParentInstantly()
     if not InCombatLockdown() then
         self.fadeDelta = -1;
         UIParent:SetAlpha(1);
-        SetUIVisibility(false);
+        SetGameUIShown(false);
         if HIDE_UI and HIDE_SPARKLES then
             self.t = 2;
             self:SetScript("OnUpdate", self.HideSparkles_OnUpdate);
@@ -1100,10 +1100,12 @@ end
 
 do  -- For 12.1.0: Disable "CloseAllWindows()" for "UI.TopLevelParentShown" (See Interface/AddOns/Blizzard_Game/Shared/Game.lua)
     -- Otherwise UIs like MerchantFrame will not appear if they are opened while the UIParent is hidden.
-    -- This approach might taint EventRegistry, but it's the best workaround for now.
     -- Systems that uses "UI.TopLevelParentShown" seem to be of low importance:
     -- LowHealthFrame and ActionStatus (the container that shows Screen Captured)
 
+    -- UNUSED!!! ---
+
+    --[[
     local function UnregisterCallbackWidthNoOwner(callbackType, event)
         if EventRegistry.callbackTables and EventRegistry.callbackTables[callbackType] then
             local callbacks = EventRegistry.callbackTables[callbackType][event];
@@ -1117,4 +1119,49 @@ do  -- For 12.1.0: Disable "CloseAllWindows()" for "UI.TopLevelParentShown" (See
         end
     end
     UnregisterCallbackWidthNoOwner(2, "UI.TopLevelParentShown");
+    --]]
+end
+
+
+-- Use a new method in 12.1 to handle UI Visiblity
+if UIModeUtil and UIModeUtil.RegisterMode and UIModeUtil.SetModeActive then
+    local modeName = "DialogueUI.HideUI";
+
+    UIModeUtil.RegisterMode(modeName, {
+        rolesetBlocklist = {
+            "actionBars",
+            "arenaFrames",
+            "bags",
+            "buffs",
+            "chat",
+            "cooldownViewers",
+            "encounterUI",
+            "extraAbilities",
+            "microMenu",
+            "minimap",
+            "objectives",
+            "pvp",
+            "statusBars",
+            "unitFrames",
+            "widgets",
+        },
+    });
+
+    SetGameUIShown = function(state)
+        UIModeUtil.SetModeActive(modeName, not state);
+        if state then
+            UIParent:SetAlpha(1);
+        else
+            UIParent:SetAlpha(0);
+        end
+    end
+
+    local Dummy = {};
+    Dummy.isDialogueUI = true;
+
+    function Dummy:OnUIParentShown()
+        SetGameUIShown(true);
+    end
+
+    EventRegistry:RegisterCallback("UI.TopLevelParentHidden", Dummy.OnUIParentShown, Dummy);
 end
