@@ -2314,6 +2314,15 @@ do  -- Chat Message
         end
         print(ADDON_ICON.." |cffffd100"..msg.."|r");
     end
+
+    function API.GenerateQuestLink(questID)
+        if questID and questID ~= 0 then
+            local questName = questID and API.GetQuestName(questID);
+            if questName then
+                return string.format("|cffffff00|Hquest:%s:0|h[%s]|h|r", questID, questName);
+            end
+        end
+    end
 end
 
 do  -- Tooltip
