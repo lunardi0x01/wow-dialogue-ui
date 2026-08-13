@@ -57,6 +57,36 @@ if not addon.IsToCVersionEqualOrNewerThan(50000) then
     end
 end
 
+local DeclinedQuests = {};
+
+local function FlagQuestDeclined()
+    local questID = GetQuestID();
+    if questID and questID ~= 0 then
+        if DeclinedQuests[questID] then
+            DeclinedQuests[questID] = DeclinedQuests[questID] + 1;
+        else
+            DeclinedQuests[questID] = 1;
+        end
+    end
+end
+addon.FlagQuestDeclined = FlagQuestDeclined;
+
+API.AddCustomLinkType("UnblockQuest", function(questID)
+    questID = questID and tonumber(questID);
+    if questID and DeclinedQuests[questID] then
+        DeclinedQuests[questID] = nil;
+        API.PrintMessage(addon.L["Quest Unblocked Alert"]);
+    end
+end);
+
+local function GetQuestDeclinedTimes()
+    -- Only affect area triggered quests
+    local questID = GetQuestID();
+    if questID and questID ~= 0 then
+        return DeclinedQuests[questID]
+    end
+end
+
 local function ShouldMuteQuest()
     local questID = GetQuestID();
     return ShouldMuteQuestDetail(questID)
