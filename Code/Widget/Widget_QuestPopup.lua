@@ -106,7 +106,7 @@ do
 
         if button == "RightButton" and self.allowRightClickClose and isFocused then
             --Accepted quest popup closes on RightClick
-            self:Close();
+            self:Close(true);
             return
         end
 
@@ -234,7 +234,7 @@ do
         end
     end
 
-    function QuestPopupFrameMixin:Close()
+    function QuestPopupFrameMixin:Close(fromRightClick)
         self.isActive = false;
         self:Hide();
         WidgetManager:ChainRemove(self);
@@ -247,7 +247,7 @@ do
 
             if self.isReroutedQuest then
                 self.isReroutedQuest = nil;
-                if GetQuestID() == self.questID then
+                if GetQuestID() == self.questID and fromRightClick then
                     addon.FlagQuestDeclined();
                     CloseQuest();
                 end
