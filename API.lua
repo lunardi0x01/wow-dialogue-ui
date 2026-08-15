@@ -2787,7 +2787,7 @@ do  -- Tooltip
             dps = STAT_DPS_SHORT or "DPS",      --ITEM_MOD_DAMAGE_PER_SECOND_SHORT
             armor = RESISTANCE0_NAME or "Armor",
             stamina = SPELL_STAT3_NAME or "Stamina",
-            strength = SPELL_STAT1_NAME or "Strengh",
+            strength = SPELL_STAT1_NAME or "Strength",
             agility = SPELL_STAT2_NAME or "Agility",
             intellect = SPELL_STAT4_NAME or "Intellect",
             spirit = SPELL_STAT5_NAME or "Spirit",
