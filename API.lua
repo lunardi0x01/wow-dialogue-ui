@@ -848,7 +848,7 @@ do  -- NPC Interaction
         local name = UnitName("npc");
         local creatureID = GetCreatureIDFromGUID(UnitGUID("npc"));
         if creatureID then
-            name = name or "";
+            name = canaccessvalue(name) and name or "";
             return name, creatureID
         end
     end
