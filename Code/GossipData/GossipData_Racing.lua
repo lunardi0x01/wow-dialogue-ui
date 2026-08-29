@@ -334,6 +334,10 @@ local function ProcessFunc(auraInfo)
 end
 
 function DataSource:UpdateRaceTimesFromAura()
+    if C_Secrets and C_Secrets.ShouldAurasBeSecret and C_Secrets.ShouldAurasBeSecret() then
+        return;
+    end
+
     local unit = "player";
     local filter = "HELPFUL";
     local usePackedAura = true;
