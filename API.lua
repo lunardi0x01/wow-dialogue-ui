@@ -1510,10 +1510,8 @@ do  -- Quest
     API.GetRecurringQuestTimeLeft = GetRecurringQuestTimeLeft;
 
     local function ShouldMuteQuestDetail(questID)
-        --Temp Blizzard bug fix for weekly quest appearing repeatedly issue
-        local class = GetQuestClassification and GetQuestClassification(questID);
-        if (class == 4 or class == 5 or class == nil) and IsOnQuest(questID) then
-            --Nil case is for Classic where QuestClassification doesn't exist
+        --Fix for WoW offering a quest that you're ready on
+        if IsOnQuest(questID) then
             return true
         else
             return false
