@@ -38,6 +38,8 @@ local AutoSelectGossip = {
     [138009] = 1,           --(Quest) I will re-align the conduits and restore the energy.
     [138690] = 1,           --(Delve) Disrupt the summon? I've got ideas...
     [139635] = 1,           --They'll never know what hit them. Artolla
+    [141485] = 1,           --(Quest) Clear the pylons and destroy the eggs before they hatch. Got it.
+    [140366] = 1,           --(Quest) Snakes and Toxic Clouds? Must be Ula'tek...
 
     [48598] = true,         --I'd like to check my mail.   [NPC: 132969] Katy Stampwhistle
     [55193] = true,         --Mail [NPC: 191869] Child of Ohn'ahra
