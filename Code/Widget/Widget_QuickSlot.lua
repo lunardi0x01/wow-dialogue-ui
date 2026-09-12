@@ -307,7 +307,7 @@ do  --QuestRewardItemButtonMixin
         if self.hyperlink then
             self:RegisterEvent("MODIFIER_STATE_CHANGED");
             local tooltip;
-            if UIParent:IsVisible() then
+            if UIParent:IsVisible() and UIParent:GetAlpha() > 0.9 then
                 tooltip = GameTooltip;
                 tooltip:SetOwner(self, "ANCHOR_NONE");
                 tooltip:SetPoint("BOTTOMLEFT", self.Icon, "TOPRIGHT", 0, 2);
