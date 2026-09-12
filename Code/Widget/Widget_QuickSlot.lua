@@ -11,6 +11,7 @@ local GetQuestLogSpecialItemInfo = GetQuestLogSpecialItemInfo;
 local COUNTDOWN_IDLE = 4;               --When the user doesn't do anything
 local COUNTDOWN_COMPLETE_AUTO = 2;      --When the item is auto equipped by game
 local COUNTDOWN_COMPLETE_MANUAL = 1;    --When the item is equipped by clicks
+local LOOT_EVENT_LISTEN_WINDOW = 3;
 
 local Def = {
     PopupOffsetX = 0,   --Popup's default Positon
@@ -78,7 +79,7 @@ QuickSlotManager:SetScript("OnEvent", QuickSlotManager.OnEvent);
 
 function QuickSlotManager:OnUpdate_UnregisterEvents(elapsed)
     self.t = self.t + elapsed;
-    if self.t >= 1.0 then   --debug Change to infinite so we can test it off vendors
+    if self.t >= LOOT_EVENT_LISTEN_WINDOW then   --debug Change to infinite so we can test it off vendors
         self:ListenLootEvent(false);
     end
 end
