@@ -30,6 +30,7 @@ local DefaultValues = {
     QuestDifficultyStyle = 1,
     ShowForeverQuestIcon = true,
     ShowUpgradeArrow = true,
+    HideHotkeyLabels = false,
     MarkHighestSellPrice = false,
     --QuestTypeText = false,                    --Removed due to Daily/Weekly QuestClassification changes
     SimplifyCurrencyReward = false,

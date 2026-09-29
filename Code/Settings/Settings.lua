@@ -725,6 +725,7 @@ local Schematic = { --Scheme
             {type = "Checkbox", name = L["Hide UI Enhanced Mode"], description = L["Hide UI Enhanced Mode Desc"], tooltip = HideUIEnchancedMode_Tooltip, dbKey = "HideUI_EnhancedMode", requiredParentValueAnd = {HideUI = true}, validationFunc = HideUIEnchancedMode_Validation},
             {type = "Checkbox", name = L["Show Copy Text Button"], description = L["Show Copy Text Button Desc"], preview = "CopyTextButton", ratio = 1, dbKey = "ShowCopyTextButton"},
             {type = "Checkbox", name = L["Show NPC Name On Page"], description = L["Show NPC Name On Page Desc"], dbKey = "ShowNPCNameOnPage"},
+            {type = "Checkbox", name = L["Hide Hotkey Labels"], description = L["Hide Hotkey Labels Desc"], dbKey = "HideHotkeyLabels"},
 
             {type = "Subheader", name = L["Quest"]},    --Quest
             {type = "ArrowOption", name = L["Quest Difficulty Option"], description = L["Quest Difficulty Option Desc"], tooltip = QuestDifficultyStyle_Tooltip, dbKey = "QuestDifficultyStyle", validationFunc = QuestDifficulty_Validation, preview = "QuestDifficultyStyle", ratio = 2,
