@@ -781,7 +781,7 @@ function DUIDialogBaseMixin:UseQuestLayout(state)
         if anyRightIcon then
             self.WarbandCompleteAlert:Hide();
         else
-            if API.ShouldShowWarbandCompletedIcon(questID) then
+            if (not GetDBBool("HideWarbandCompletedIcon")) and API.ShouldShowWarbandCompletedIcon(questID) then
                 anyRightIcon = true;
                 self.WarbandCompleteAlert:Show();
                 CallbackRegistry:TriggerOnNextUpdate("WarbandCompleteAlert.Show", self.FrontFrame.Header, self.WarbandCompleteAlert);

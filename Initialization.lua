@@ -33,6 +33,7 @@ local DefaultValues = {
     HideHotkeyLabels = false,
     MarkHighestSellPrice = false,
     --QuestTypeText = false,                    --Removed due to Daily/Weekly QuestClassification changes
+    HideWarbandCompletedIcon = false,
     SimplifyCurrencyReward = false,
     UseRoleplayName = false,
     UseBlizzardTooltip = false,

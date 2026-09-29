@@ -15,6 +15,7 @@ local IsCtrlDown = addon.DeviceUtil.IsCtrlDown;
 -- User Settings
 local INPUT_DEVICE_GAME_PAD = false;
 local HIDE_HOTKEY_LABELS = false;
+local HIDE_WARBAND_COMPLETED_ICON = false;
 ------------------
 
 local BUTTON_TEXT_SPACING = 4;      --Font Size * 0.35
@@ -532,7 +533,7 @@ function DUIDialogOptionButtonMixin:SetQuest(questInfo, hotkey)
     self:SetQuestVisual(questInfo);
     self:SetQuestName(questInfo);
 
-    if API.ShouldShowWarbandCompletedIcon(self.questID) then
+    if (not HIDE_WARBAND_COMPLETED_ICON) and API.ShouldShowWarbandCompletedIcon(self.questID) then
         self:ShowWarbandCompletedIcon();
     end
 
@@ -2844,6 +2845,12 @@ do  --Settings, CallbackRegistry
         addon.DialogueUI:OnSettingsChanged();
     end
     CallbackRegistry:Register("SettingChanged.HideHotkeyLabels", Settings_HideHotkeyLabels);
+
+    local function Settings_HideWarbandCompletedIcon(dbValue)
+        HIDE_WARBAND_COMPLETED_ICON = dbValue == true;
+        addon.DialogueUI:OnSettingsChanged();
+    end
+    CallbackRegistry:Register("SettingChanged.HideWarbandCompletedIcon", Settings_HideWarbandCompletedIcon);
 
 
     local function Settings_InputDevice(dbValue)
