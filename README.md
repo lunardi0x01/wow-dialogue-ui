@@ -61,8 +61,8 @@ official release download. So install DialogueUI normally first, then put this
 fork's code on top:
 
 ```bash
-git clone https://github.com/lunardi0x01/YUI-Dialogue.git ~/Projects/YUI-Dialogue
-cd ~/Projects/YUI-Dialogue
+git clone https://github.com/lunardi0x01/wow-dialogue-ui.git ~/Projects/wow-dialogue-ui
+cd ~/Projects/wow-dialogue-ui
 git remote add upstream https://github.com/Peterodox/YUI-Dialogue.git
 git remote set-url --push upstream DISABLED
 ./install.sh            # then /reload in game
@@ -81,7 +81,7 @@ game folder. The options vanish from the settings panel, but your saved choices 
 kept. To get them back:
 
 ```bash
-cd ~/Projects/YUI-Dialogue
+cd ~/Projects/wow-dialogue-ui
 ./update.sh      # fetch upstream, replay our commits onto the newest release, push
 ./install.sh     # copy onto the freshly updated addon
 ```
