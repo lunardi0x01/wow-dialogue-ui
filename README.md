@@ -88,6 +88,14 @@ cd ~/Projects/wow-dialogue-ui
 
 Then `/reload` in game.
 
+Between releases, upstream fixes from Peterodox's `main` can be cherry-picked onto
+`tweaks` with `git cherry-pick -x <commit>`; `-x` records where each came from.
+When the release that contains them comes out, `update.sh`'s rebase drops the
+copies, because they match commits already in the new release. On 18 October
+2026 three were taken from upstream `main` after v1.0.6: 27981bc (scroll and header
+layout after a settings change while hidden), b5ace60 (TOC game-type directives)
+and ab0ac87 (theme text colour fix).
+
 **If `update.sh` stops on a conflict**, upstream changed code near one of our
 edits. Git marks the conflicted files. Fix them, `git add` them, then run
 `git rebase --continue`. Afterwards run `git push --force-with-lease origin tweaks`
