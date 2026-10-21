@@ -70,7 +70,7 @@ git remote set-url --push upstream DISABLED
 
 `install.sh` copies only the files tracked in git into the installed DialogueUI
 folder. It never deletes anything, so release-only assets and your saved settings
-aren't touched. The default target is the Faugus / Battle.net `_classic_beta_`
+aren't touched. The default target is the Faugus / Battle.net `_forever_`
 install. For any other install, pass the folder path as an argument or set
 `DIALOGUEUI_DIR`.
 
