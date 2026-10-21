@@ -9,7 +9,7 @@
 #        or set DIALOGUEUI_DIR.
 set -euo pipefail
 
-DEFAULT_DIR="$HOME/Faugus/battlenet/drive_c/Program Files (x86)/World of Warcraft/_classic_beta_/Interface/AddOns/DialogueUI"
+DEFAULT_DIR="$HOME/Faugus/battlenet/drive_c/Program Files (x86)/World of Warcraft/_forever_/Interface/AddOns/DialogueUI"
 TARGET="${1:-${DIALOGUEUI_DIR:-$DEFAULT_DIR}}"
 
 cd "$(dirname "$0")"
